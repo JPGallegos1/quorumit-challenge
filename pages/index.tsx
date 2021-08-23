@@ -1,91 +1,45 @@
-import { useRef, useState } from "react";
+import { useEffect } from "react";
 import type { NextPage } from "next";
-import {
-  Heading,
-  VStack,
-  HStack,
-  Box,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { VStack, HStack, Box } from "@chakra-ui/react";
+
+import { useCoinContext } from "@/contexts/CoinContext";
 
 import Layout from "@/components/Layout";
+import TraddingApp from "@/components/TradingApp";
+import Dropdown from "@/components/Dropdown";
+import SwitchPrice from "@/components/SwitchPrice";
+
+import useCoin from "@/hooks/useCoin";
+import CoinPrices from "@/components/CoinPrices";
 
 const Home: NextPage = () => {
+  const { coin, coinName, setCoinName, priceInUsd, setPriceInUsd, isLoading } =
+    useCoinContext();
+  const { getCoinInfo } = useCoin();
+
+  useEffect(() => {
+    if (!coinName.length) return;
+    else getCoinInfo(coinName);
+  }, [coinName]);
+
   return (
     <Layout title="Home">
       <VStack height="100%" paddingBottom="2rem">
-        <Box width="100%">
-          <Heading
-            textStyle="h1"
-            color="quorum.gray.300"
-            textAlign="left"
-            fontFamily="SF Pro Display Regular"
-          >
-            Tradding App
-          </Heading>
-        </Box>
+        <TraddingApp />
 
         <HStack width="100%" height="100%">
           <VStack height="34.375rem" width="40%" alignSelf="stretch">
-            <HStack width="100%" height="42%">
-              <Box id="image" h="5rem" w="5rem" background="white"></Box>
-              <VStack width="100%">
-                <HStack color="white" width="100%" justify="space-around">
-                  <Box>
-                    <Text>BTC</Text>
-                    <Text>Bitcoin</Text>
-                  </Box>
-                  <Box>
-                    <Text>BTC</Text>
-                    <Text>Bitcoin</Text>
-                  </Box>
-                </HStack>
-              </VStack>
+            <Dropdown
+              coin={coin}
+              setCoinName={setCoinName}
+              isLoading={isLoading}
+            />
+            <SwitchPrice
+              priceInUsd={priceInUsd}
+              setPriceInUsd={setPriceInUsd}
+            />
 
-              <Box>
-                <Menu isLazy id="menu-button-2">
-                  <MenuButton
-                    as={IconButton}
-                    aria-label="Options"
-                    icon={<ChevronDownIcon />}
-                    variant="outline"
-                    borderRadius="full"
-                    color="white"
-                    background="quorum.gray.400"
-                    _hover={{ bg: "trasparent" }}
-                    _focus={{ borderColor: "quorum.black.300" }}
-                    _expanded={{ bg: "quorum.gray.400" }}
-                  />
-                  <MenuList
-                    background="quorum.black.200"
-                    color="white"
-                    border="none"
-                  >
-                    <MenuItem _hover={{ bg: "quorum.black.100" }}>
-                      BTC - Bitcoin
-                    </MenuItem>
-                    <MenuItem _hover={{ bg: "quorum.black.100" }}>
-                      ETH - Ethereum
-                    </MenuItem>
-                    <MenuItem _hover={{ bg: "quorum.black.100" }}>
-                      Cardano - Bitcoin
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </Box>
-            </HStack>
-            <Box
-              height="100%"
-              width="100%"
-              background="quorum.black.200"
-              margin="0"
-            ></Box>
+            <CoinPrices priceInUsd={priceInUsd} coin={coin} />
           </VStack>
 
           <VStack width="100%" height="34.375rem" justify="flex-end">

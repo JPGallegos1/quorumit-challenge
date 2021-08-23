@@ -18,6 +18,8 @@
       "@/components/*": ["components/*"],
       "@/contexts/*": ["contexts/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/constants/*": ["constants/"],
+      "@/types/*": ["types/"],
       "@/public/*": ["public/*"]
     }
   },

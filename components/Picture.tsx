@@ -12,11 +12,11 @@ const Picture: FC<IPicture> = ({ src, srcset, alt, height }: IPicture) => {
   return (
     <>
       <picture>
-        <source srcSet={`/assets/${srcset}`} type="image/webp" />
-        <source srcSet={`/assets/${srcset}`} type="image/svg" />
-        <source srcSet={`/assets/${srcset}`} type="image/jpg" />
-        <source srcSet={`/assets/${srcset}`} type="image/png" />
-        <Image src={`/assets/${src}`} alt={alt} height={height} />
+        <source srcSet={`${srcset}`} type="image/webp" />
+        <source srcSet={`${srcset}`} type="image/svg" />
+        <source srcSet={`${srcset}`} type="image/jpg" />
+        <source srcSet={`${srcset}`} type="image/png" />
+        <Image src={`${src}`} alt={alt} height={height} />
       </picture>
     </>
   );

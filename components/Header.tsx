@@ -13,10 +13,10 @@ const Header: FC = () => {
         justify="flex-end"
       >
         <Picture
-          src="quorum-logo.svg"
+          src="/assets/quorum-logo.svg"
           alt="Logo of Quorum Information Technology"
           height="100%"
-          srcset="quorum-logo.svg"
+          srcset="/assets/quorum-logo.svg"
         />
       </HStack>
     </>
