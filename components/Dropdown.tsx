@@ -13,7 +13,7 @@ const Dropdown: React.FC<IDropdown> = ({
 }: IDropdown) => {
   return (
     <HStack width="100%" height="42%">
-      <DropdownImage coin={coin} />
+      <DropdownImage coin={coin} isLoading={isLoading} />
       <VStack width="100%">
         {!coin.symbol || !coin.name ? (
           <Text
@@ -26,7 +26,7 @@ const Dropdown: React.FC<IDropdown> = ({
             Select a coin
           </Text>
         ) : (
-          <DropdownCoinInfo coin={coin} />
+          <DropdownCoinInfo coin={coin} isLoading={isLoading} />
         )}
       </VStack>
 

@@ -32,10 +32,9 @@ const CoinPrices: React.FC<ICoinPrices> = ({ priceInUsd, coin }) => {
           fontWeight="600"
           letterSpacing="-0.02em"
         >
-          $
           {priceInUsd
-            ? `${coin?.market_data?.current_price.usd} USD`
-            : `${coin?.market_data?.current_price.ars} ARS`}
+            ? `${coin?.market_data?.current_price.usd ?? 0} USD`
+            : `${coin?.market_data?.current_price.ars ?? 0} ARS`}
         </Text>
       </Box>
       <Box
@@ -61,10 +60,9 @@ const CoinPrices: React.FC<ICoinPrices> = ({ priceInUsd, coin }) => {
           fontWeight="600"
           letterSpacing="-0.02em"
         >
-          $
           {priceInUsd
-            ? `${coin?.market_data?.low_24h.usd} USD`
-            : `${coin?.market_data?.low_24h.ars} ARS`}
+            ? `${coin?.market_data?.low_24h.usd ?? 0} USD`
+            : `${coin?.market_data?.low_24h.ars ?? 0} ARS`}
         </Text>
       </Box>
       <Box
@@ -90,10 +88,9 @@ const CoinPrices: React.FC<ICoinPrices> = ({ priceInUsd, coin }) => {
           fontWeight="600"
           letterSpacing="-0.02em"
         >
-          $
           {priceInUsd
-            ? `${coin?.market_data?.high_24h.usd} USD`
-            : `${coin?.market_data?.high_24h.ars} ARS`}
+            ? `${coin?.market_data?.high_24h.usd ?? 0} USD`
+            : `${coin?.market_data?.high_24h.ars ?? 0} ARS`}
         </Text>
       </Box>
     </Box>

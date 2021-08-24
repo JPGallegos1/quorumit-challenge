@@ -54,7 +54,7 @@ export interface ISwitchPrice {
 
 export interface IButton {
   onClick: () => void;
-  condition: boolean;
+  condition?: boolean;
   label: string;
 }
 
@@ -70,4 +70,5 @@ export interface IDropdownMenu {
 
 export interface IDropdownCoinInfo {
   coin: ICoin;
+  isLoading: boolean;
 }
