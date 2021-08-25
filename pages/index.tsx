@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { VStack, HStack, Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { VStack, HStack, Box, Text } from "@chakra-ui/react";
 
 import { useCoinContext } from "@/contexts/CoinContext";
 
@@ -11,11 +12,13 @@ import SwitchPrice from "@/components/SwitchPrice";
 
 import useCoin from "@/hooks/useCoin";
 import CoinPrices from "@/components/CoinPrices";
+import SwitchRoutes from "@/components/SwitchRoutes";
 
 const Home: NextPage = () => {
   const { coin, coinName, setCoinName, priceInUsd, setPriceInUsd, isLoading } =
     useCoinContext();
   const { getCoinInfo } = useCoin();
+  const router = useRouter();
 
   useEffect(() => {
     if (!coinName.length) return;
@@ -26,6 +29,8 @@ const Home: NextPage = () => {
     <Layout title="Home">
       <VStack height="100%" paddingBottom="2rem">
         <TraddingApp />
+
+        <SwitchRoutes router={router} coin={coin} priceInUsd={priceInUsd} />
 
         <HStack width="100%" height="100%">
           <VStack height="34.375rem" width="40%" alignSelf="stretch">
