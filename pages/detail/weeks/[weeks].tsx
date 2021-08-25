@@ -1,44 +1,65 @@
-import Layout from "@/components/Layout";
-import { Box } from "@chakra-ui/react";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { getMarketData } from "../../../services/market";
 
-export interface CoinProps {
-  props: any;
-}
+import { Box, HStack } from "@chakra-ui/react";
 
-const CoinPerWeek: NextPage<CoinProps> = (props: CoinProps) => {
-  console.log(props);
+import Chart from "@/components/Chart";
+import Details from "@/components/Details";
+import Layout from "@/components/Layout";
 
-  // TODO: We should use server-side just calling the API with day=1 param and send the user to the other routes in case its change the day from 1 to 14 or 30.
+import { IDetails } from "types";
+import useTime from "@/hooks/useTime";
 
-  // const router = useRouter();
-  // const { coinName, isUsd } = router.query;
+const CoinPerWeek: NextPage<IDetails> = ({ data }: IDetails) => {
+  const router = useRouter();
+  const { time } = useTime(data);
 
-  // useEffect(() => {
-  //   getMarketData(coinName, isUsd);
-  // }, []);
+  const { name, vs_currency } = router.query;
+  const getCoinDataPerDay = () => {
+    router.push({
+      pathname: `/detail/days/${name}`,
+      query: { name, vs_currency },
+    });
+  };
+
+  const getCoinDataPerMonth = () => {
+    router.push({
+      pathname: `/detail/month/${name}`,
+      query: { name, vs_currency },
+    });
+  };
 
   return (
     <Layout title="Coin">
-      <Box color="white">works</Box>
+      <HStack color="white" alignItems="flex-start" justify="space-between">
+        <Details time={time} data={data} />
+
+        <Box height="100%" width="55%">
+          <HStack>
+            <Box padding="2rem" onClick={getCoinDataPerDay}>
+              1
+            </Box>
+            <Box padding="2rem" onClick={getCoinDataPerMonth}>
+              30
+            </Box>
+          </HStack>
+          <Chart data={data} />
+        </Box>
+      </HStack>
     </Layout>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log(query);
+  console.log("query strings", query);
 
   const res = await fetch(
-    `https://api.coingecko.com/api/v3/coins/${query.name}/market_chart?vs_currency=${query.vs_currency}&days=${query.days}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/coins/${query.name}/market_chart?vs_currency=${query.vs_currency}&days=14`
   );
   const data = await res.json();
-  console.log(data);
 
   return {
-    props: { props: data },
+    props: { data },
   };
 };
 

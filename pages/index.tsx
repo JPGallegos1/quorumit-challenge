@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { VStack, HStack, Box } from "@chakra-ui/react";
+import { VStack, HStack, Box, Text } from "@chakra-ui/react";
 
 import { useCoinContext } from "@/contexts/CoinContext";
 

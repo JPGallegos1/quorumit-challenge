@@ -1,3 +1,4 @@
+import useTime from "@/hooks/useTime";
 import { Box } from "@chakra-ui/react";
 import { NextRouter } from "next/router";
 import { ICoin } from "types";
@@ -15,6 +16,7 @@ const SwitchRoutes: React.FC<ISwitchRoutes> = ({
   priceInUsd,
 }: ISwitchRoutes) => {
   const vs_currency = priceInUsd ? "usd" : "ars";
+
   return (
     <Box height="20%" width="100%" margin="0">
       <Button onClick={() => router.push("/")} label="CRYPTO" />
@@ -23,7 +25,10 @@ const SwitchRoutes: React.FC<ISwitchRoutes> = ({
         onClick={() =>
           router.push({
             pathname: `/detail/days/${coin.symbol}`,
-            query: { name: coin.name.toLowerCase(), vs_currency },
+            query: {
+              name: coin.name.toLowerCase(),
+              vs_currency,
+            },
           })
         }
         label="GRAPHIC VIEW"

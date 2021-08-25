@@ -72,3 +72,9 @@ export interface IDropdownCoinInfo {
   coin: ICoin;
   isLoading: boolean;
 }
+
+export interface IDetails {
+  data: {
+    prices: [];
+  };
+}
