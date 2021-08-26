@@ -28,6 +28,9 @@
 
 And all under TypeScript control.
 
+![image](https://user-images.githubusercontent.com/43424229/131044521-10ef0a68-6585-4e05-a33b-3706cee49ee6.png)
+
+
 ## Git strategy
 
 ![image](https://user-images.githubusercontent.com/43424229/131042943-79843644-4464-4562-98bb-4cd77f3b3965.png)
