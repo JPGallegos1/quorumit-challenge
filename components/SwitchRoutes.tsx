@@ -1,9 +1,10 @@
-import useTime from "@/hooks/useTime";
-import { Box } from "@chakra-ui/react";
 import { NextRouter } from "next/router";
-import { useState } from "react";
-import { ICoin } from "types";
+import { Box } from "@chakra-ui/react";
+
+import { useCoinContext } from "@/contexts/CoinContext";
 import Button from "./Button";
+
+import { ICoin } from "types";
 
 export interface ISwitchRoutes {
   router: NextRouter;
@@ -16,7 +17,7 @@ const SwitchRoutes: React.FC<ISwitchRoutes> = ({
   coin,
   priceInUsd,
 }: ISwitchRoutes) => {
-  const [isGraphicTab, setIsGraphicTab] = useState(false);
+  const { isGraphicTab, setIsGraphicTab } = useCoinContext();
   const vs_currency = priceInUsd ? "usd" : "ars";
 
   const graphicTab = () => {
@@ -42,13 +43,14 @@ const SwitchRoutes: React.FC<ISwitchRoutes> = ({
       <Button
         onClick={() => router.push("/")}
         label="CRYPTO"
-        condition={isGraphicTab}
+        condition={!isGraphicTab}
       />
 
       <Button
         onClick={graphicTab}
         label="GRAPHIC VIEW"
-        condition={!isGraphicTab}
+        condition={isGraphicTab}
+        disabled={!coin.name && !coin.symbol}
       />
     </Box>
   );

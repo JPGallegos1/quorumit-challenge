@@ -45,6 +45,8 @@ export interface IContextValue {
   setCoin: (coin: ICoin) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  isGraphicTab: boolean;
+  setIsGraphicTab: (isGraphicTab: boolean) => void;
 }
 
 export interface ISwitchPrice {
@@ -56,6 +58,7 @@ export interface IButton {
   onClick: () => void;
   condition?: boolean;
   label: string;
+  disabled?: boolean;
 }
 
 export interface IDropdown {

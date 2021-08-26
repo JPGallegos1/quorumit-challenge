@@ -1,11 +1,12 @@
 import { ICoin } from "@/types/index";
 import { COINS_URL } from "@/constants/index";
 import { useCoinContext } from "@/contexts/CoinContext";
-
-export interface ICoinHook {}
+import { useRouter } from "next/router";
 
 const useCoin = () => {
   const { setCoin, setIsLoading } = useCoinContext();
+  const router = useRouter();
+
   const getCoinInfo = async (coin: string) => {
     const url = `${COINS_URL}/${coin}`;
 
@@ -42,11 +43,17 @@ const useCoin = () => {
             },
           },
         };
+        if (window !== undefined) {
+          window.localStorage.setItem("coin", JSON.stringify(coinPayload));
+        }
         setCoin(coinPayload);
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      if (error) {
+        window.localStorage.clear();
+        router.push("/404");
+      }
     }
   };
 

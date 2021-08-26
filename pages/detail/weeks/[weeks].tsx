@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { Box, HStack, Stack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 
 import Chart from "@/components/Chart";
 import Details from "@/components/Details";
@@ -54,12 +54,16 @@ const CoinPerWeek: NextPage<IDetails> = ({ data }: IDetails) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log("query strings", query);
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/coins/${query.name}/market_chart?vs_currency=${query.vs_currency}&days=14`
   );
   const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { data },

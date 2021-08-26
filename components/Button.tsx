@@ -1,7 +1,12 @@
 import { Box } from "@chakra-ui/react";
 import { IButton } from "types";
 
-const Button: React.FC<IButton> = ({ onClick, condition, label }: IButton) => {
+const Button: React.FC<IButton> = ({
+  onClick,
+  condition,
+  label,
+  disabled,
+}: IButton) => {
   return (
     <Box
       as="button"
@@ -19,6 +24,8 @@ const Button: React.FC<IButton> = ({ onClick, condition, label }: IButton) => {
       lineHeight="18px"
       textAlign="center"
       padding="0.5rem"
+      disabled={disabled}
+      cursor={disabled ? "not-allowed" : "pointer"}
     >
       {label}
     </Box>
