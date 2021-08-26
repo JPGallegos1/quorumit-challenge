@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Line } from "react-chartjs-2";
 
 export interface IChart {
@@ -28,7 +29,7 @@ const Chart: React.FC<IChart> = ({ data }: IChart) => {
     ],
   };
   return (
-    <>
+    <Box width="full" display={{ base: "none", sm: "block" }}>
       <Line
         data={chartOptions}
         options={{
@@ -44,7 +45,7 @@ const Chart: React.FC<IChart> = ({ data }: IChart) => {
           },
         }}
       />
-    </>
+    </Box>
   );
 };
 

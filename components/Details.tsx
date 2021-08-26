@@ -8,7 +8,13 @@ export interface IDetails {
 const Details: React.FC<IDetails> = ({ time, data }: IDetails) => {
   return (
     <>
-      <HStack width="30%" justify="space-between">
+      <HStack
+        width={{ base: "100%", sm: "30%" }}
+        justify={{ base: "space-around", lg: "space-between" }}
+        alignSelf="stretch"
+        display={{ base: "flex", sm: "none", md: "none", lg: "flex" }}
+        paddingY="2rem"
+      >
         <Box>
           <Text
             color="quorum.gray.200"

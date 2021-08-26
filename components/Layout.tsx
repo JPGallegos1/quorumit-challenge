@@ -4,6 +4,10 @@ import { Container, VStack, Box } from "@chakra-ui/react";
 
 import Header from "./Header";
 import Footer from "./Footer";
+import TraddingApp from "./TradingApp";
+import SwitchRoutes from "./SwitchRoutes";
+import { useRouter } from "next/router";
+import { useCoinContext } from "@/contexts/CoinContext";
 
 interface ILayout {
   children: ReactNode;
@@ -11,6 +15,10 @@ interface ILayout {
 }
 
 const Layout: FC<ILayout> = ({ children, title }: ILayout) => {
+  const router = useRouter();
+  const { coin, priceInUsd } = useCoinContext();
+  console.log(coin);
+
   return (
     <>
       <Head>
@@ -26,7 +34,11 @@ const Layout: FC<ILayout> = ({ children, title }: ILayout) => {
           flex="1"
         >
           <Box as="section" height="100%">
-            {children}
+            <TraddingApp />
+
+            <SwitchRoutes router={router} coin={coin} priceInUsd={priceInUsd} />
+
+            <>{children}</>
           </Box>
         </Container>
         <Footer author="Juan Pablo Gallegos" company="Quorum IT Challenge" />

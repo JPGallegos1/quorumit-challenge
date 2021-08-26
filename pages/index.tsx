@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { VStack, HStack, Box, Text } from "@chakra-ui/react";
+import { VStack, HStack, Box, Text, Stack } from "@chakra-ui/react";
 
 import { useCoinContext } from "@/contexts/CoinContext";
 
@@ -17,8 +17,8 @@ import SwitchRoutes from "@/components/SwitchRoutes";
 const Home: NextPage = () => {
   const { coin, coinName, setCoinName, priceInUsd, setPriceInUsd, isLoading } =
     useCoinContext();
+
   const { getCoinInfo } = useCoin();
-  const router = useRouter();
 
   useEffect(() => {
     if (!coinName.length) return;
@@ -28,12 +28,13 @@ const Home: NextPage = () => {
   return (
     <Layout title="Home">
       <VStack height="100%" paddingBottom="2rem">
-        <TraddingApp />
-
-        <SwitchRoutes router={router} coin={coin} priceInUsd={priceInUsd} />
-
-        <HStack width="100%" height="100%">
-          <VStack height="34.375rem" width="40%" alignSelf="stretch">
+        <HStack width="100%" height="100%" justify="space-between">
+          <VStack
+            height="34.375rem"
+            width={{ base: "90%", sm: "80%", md: "30%" }}
+            margin={{ base: "0 auto", sm: "0 auto" }}
+            alignSelf="stretch"
+          >
             <Dropdown
               coin={coin}
               setCoinName={setCoinName}
@@ -47,8 +48,24 @@ const Home: NextPage = () => {
             <CoinPrices priceInUsd={priceInUsd} coin={coin} />
           </VStack>
 
-          <VStack width="100%" height="34.375rem" justify="flex-end">
-            <Box background="quorum.black.300" height="70%" width="100%"></Box>
+          <VStack
+            width="65%"
+            height="34.375rem"
+            justify="flex-end"
+            display={{ base: "none", sm: "none", md: "flex" }}
+          >
+            <Box
+              background="quorum.black.300"
+              height="70%"
+              width="100%"
+              display={{
+                base: "none",
+                sm: "none",
+                md: "block",
+                lg: "block",
+                xl: "block",
+              }}
+            ></Box>
           </VStack>
         </HStack>
       </VStack>
