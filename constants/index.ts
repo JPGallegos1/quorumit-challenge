@@ -1,19 +1,19 @@
 export const COINS_URL: string = `${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_COINS_ENDPOINT}`;
 export const COIN_OPTIONS = [
   {
-    name: "bitcoin",
+    name: "Bitcoin",
     label: "BTC",
   },
   {
-    name: "ethereum",
+    name: "Ethereum",
     label: "ETH",
   },
   {
-    name: "dogecoin",
+    name: "Dogecoin",
     label: "DOGE",
   },
   {
-    name: "cardano",
+    name: "Cardano",
     label: "ADA",
   },
 ];

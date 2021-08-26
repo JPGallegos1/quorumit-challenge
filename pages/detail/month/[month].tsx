@@ -1,14 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, Stack } from "@chakra-ui/react";
 
 import Chart from "@/components/Chart";
 import Details from "@/components/Details";
 import Layout from "@/components/Layout";
+import CoinNavigator from "@/components/CoinNavigator";
+
+import useTime from "@/hooks/useTime";
+import useCoinNavigation from "@/hooks/useCoinNavigation";
 
 import { IDetails } from "types";
-import useTime from "@/hooks/useTime";
 
 const CoinPerMonth: NextPage<IDetails> = ({ data }: IDetails) => {
   const router = useRouter();
@@ -16,37 +19,36 @@ const CoinPerMonth: NextPage<IDetails> = ({ data }: IDetails) => {
 
   const { name, vs_currency } = router.query;
 
-  const getCoinDataPerDay = () => {
-    router.push({
-      pathname: `/detail/days/${name}`,
-      query: { name, vs_currency },
-    });
-  };
-
-  const getCoinDataPerWeeks = () => {
-    router.push({
-      pathname: `/detail/weeks/${name}`,
-      query: { name, vs_currency },
-    });
-  };
+  const { getCoinDataPerWeeks, getCoinDataPerDay } = useCoinNavigation(
+    name,
+    vs_currency
+  );
 
   return (
-    <Layout title={name as string}>
-      <HStack color="white" alignItems="flex-start" justify="space-between">
+    <Layout title={(name as string).replace(/^\w/, (c) => c.toUpperCase())}>
+      <Stack
+        color="quorum.gray.200"
+        direction={{ base: "column", sm: "row" }}
+        alignItems="flex-start"
+        justify="space-between"
+      >
         <Details time={time} data={data} />
 
-        <Box height="100%" width="55%">
-          <HStack>
-            <Box padding="2rem" onClick={getCoinDataPerDay}>
-              1
-            </Box>
-            <Box padding="2rem" onClick={getCoinDataPerWeeks}>
-              14
-            </Box>
-          </HStack>
+        <Box
+          height="100%"
+          width={{ base: "100%", sm: "100%", md: "100%", lg: "55%" }}
+          display={{ sm: "block" }}
+          paddingY={{ base: 0, sm: "2rem" }}
+        >
+          <CoinNavigator
+            labelPrevPage="01 day ago"
+            labelNextPage="14 days ago"
+            prevPage={getCoinDataPerDay}
+            nextPage={getCoinDataPerWeeks}
+          />
           <Chart data={data} />
         </Box>
-      </HStack>
+      </Stack>
     </Layout>
   );
 };

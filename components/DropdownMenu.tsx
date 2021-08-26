@@ -30,7 +30,7 @@ const DropdownMenu: React.FC<IDropdownMenu> = ({ setCoinName }) => {
             <MenuItem
               _hover={{ bg: "quorum.black.100" }}
               key={coin.name}
-              onClick={() => setCoinName(coin.name)}
+              onClick={() => setCoinName(coin.name.toLowerCase())}
             >
               {coin.label} - {coin.name}
             </MenuItem>
