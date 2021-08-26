@@ -17,6 +17,7 @@ import SwitchRoutes from "@/components/SwitchRoutes";
 const Home: NextPage = () => {
   const { coin, coinName, setCoinName, priceInUsd, setPriceInUsd, isLoading } =
     useCoinContext();
+
   const { getCoinInfo } = useCoin();
   const router = useRouter();
 
