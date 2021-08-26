@@ -14,6 +14,7 @@ export const CoinsProvider: React.FC<IChildren> = ({
   const [priceInUsd, setPriceInUsd] = useState<boolean>(true);
   const [coin, setCoin] = useState<ICoin>({} as ICoin);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isGraphicTab, setIsGraphicTab] = useState<boolean>(false);
 
   const context: IContextValue = {
     coinName,
@@ -24,6 +25,8 @@ export const CoinsProvider: React.FC<IChildren> = ({
     setCoin,
     isLoading,
     setIsLoading,
+    isGraphicTab,
+    setIsGraphicTab,
   };
 
   return (
@@ -36,13 +39,11 @@ export const CoinsProvider: React.FC<IChildren> = ({
 export function useCoinContext() {
   const context = useContext(CoinContext);
 
-  console.log(context);
-
-  // if (!context) {
-  //   throw new Error(
-  //     "You're trying to render the context outside of the React Component"
-  //   );
-  // }
+  if (!context) {
+    throw new Error(
+      "You're trying to render the context outside of the React Component"
+    );
+  }
 
   return context;
 }

@@ -6,7 +6,7 @@ const TraddingApp: React.FC = () => {
       <Heading
         as="h1"
         color="quorum.gray.300"
-        textAlign="left"
+        textAlign={{ base: "center", sm: "center", md: "left" }}
         fontFamily="SF Pro Display Regular"
       >
         Tradding App

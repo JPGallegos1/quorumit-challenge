@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { VStack, HStack, Box, Text, Stack } from "@chakra-ui/react";
+import { VStack, HStack, Box } from "@chakra-ui/react";
 
 import { useCoinContext } from "@/contexts/CoinContext";
 
 import Layout from "@/components/Layout";
-import TraddingApp from "@/components/TradingApp";
 import Dropdown from "@/components/Dropdown";
 import SwitchPrice from "@/components/SwitchPrice";
 
 import useCoin from "@/hooks/useCoin";
 import CoinPrices from "@/components/CoinPrices";
-import SwitchRoutes from "@/components/SwitchRoutes";
 
 const Home: NextPage = () => {
   const { coin, coinName, setCoinName, priceInUsd, setPriceInUsd, isLoading } =

@@ -17,7 +17,6 @@ interface ILayout {
 const Layout: FC<ILayout> = ({ children, title }: ILayout) => {
   const router = useRouter();
   const { coin, priceInUsd } = useCoinContext();
-  console.log(coin);
 
   return (
     <>

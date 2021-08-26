@@ -17,7 +17,7 @@ const Chart: React.FC<IChart> = ({ data }: IChart) => {
         label: "Price",
         data:
           data &&
-          data?.prices?.slice(10).map((price: any) => price[1].toFixed(2)),
+          data.prices?.slice(10).map((price: any) => price[1].toFixed(2)),
         backgroundColor: [
           "#EE6855",
           "#EE6855",
@@ -25,6 +25,7 @@ const Chart: React.FC<IChart> = ({ data }: IChart) => {
           "#EE6855",
           "#EE6855",
         ],
+        color: "rgba(255, 99, 132, 0.2)",
       },
     ],
   };
@@ -36,7 +37,7 @@ const Chart: React.FC<IChart> = ({ data }: IChart) => {
           plugins: {
             title: {
               display: true,
-              text: "Prices",
+              text: "QUORUM",
             },
             legend: {
               display: true,
